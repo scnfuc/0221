@@ -1,0 +1,138 @@
+ 
+ 1          OPTIONS NOSYNTAXCHECK;
+ 2          TITLE;
+ 3          FOOTNOTE;
+ 4          OPTIONS LOCALE=zh_CN DFLANG=LOCALE;
+ 5          DATA _NULL_;
+ 6          RUN;
+ 
+ NOTE: “DATA 语句”所用时间（总处理时间）:
+       实际时间          0.00 秒
+       CPU 时间          0.01 秒
+       
+ 
+ 7          OPTIONS VALIDVARNAME=ANY;
+ 8          OPTIONS VALIDMEMNAME=COMPAT;
+ 9          FILENAME _HTMLOUT TEMP;
+ 10         FILENAME _RTFOUT TEMP ENCODING='UTF-8';
+ 11         FILENAME _PDFOUT TEMP;
+ 12         FILENAME _GSFNAME TEMP;
+ 13         FILENAME _DATAOUT TEMP;
+ 14         %LET SYSCC=0;
+ 15         %LET _CLIENTAPP='SAS Studio';
+ 16         %LET _CLIENTAPPABREV=Studio;
+ 17         %LET _CLIENTAPPVERSION=4.3;
+ 18         %LET _CLIENTVERSION=4.3;
+ 19         %LET _CLIENTMODE=basic;
+ 20         %LET _SASSERVERNAME=%BQUOTE(localhost);
+ 21         %LET _SASHOSTNAME=%BQUOTE(vdmml-tue-17w47-ud);
+ 22         %LET _SASPROGRAMFILEHOST=%BQUOTE(vdmml-tue-17w47-ud);
+ 23         %LET _CLIENTUSERID=%BQUOTE(scnfuc);
+ 24         %LET _CLIENTUSERNAME=%BQUOTE(Fuying Chen);
+ 25         %LET CLIENTMACHINE=%BQUOTE(VMWWIN10084.NA.SAS.COM);
+ 26         %LET _CLIENTMACHINE=%BQUOTE(VMWWIN10084.NA.SAS.COM);
+ 27         %let SASWORKLOCATION="%sysfunc(getoption(work))/";
+ 28         FILENAME _CWD '.';
+ 29         DATA _NULL_;
+ 30         CALL SYMPUT('_SASWORKINGDIR',PATHNAME('_CWD'));
+ 31         RUN;
+ 
+ NOTE: “DATA 语句”所用时间（总处理时间）:
+       实际时间          0.00 秒
+       CPU 时间          0.00 秒
+       
+ 
+ 32         FILENAME _CWD;
+ NOTE: 已取消文件引用名 _CWD 的分配。
+ 33         
+ 34         %LET _SASPROGRAMFILE = %NRQUOTE(%NRSTR(/r/ge.unx.sas.com/vol/vol120/u12/scnfuc/Edge测试文件夹/入门程序 1.sas));
+ 35         %LET _BASEURL = %BQUOTE(http://vdmml-tue-17w47.unx.sas.com/SASStudio/);
+ 36         %LET _EXECENV=SASStudio;
+ 37         DATA _NULL_;
+ 38         CALL SYMPUT("GRAPHINIT","");
+ 39         CALL SYMPUT("GRAPHTERM","");
+ 40         RC=TSLVL('GEOCODE','N');
+ 41         _ERROR_=0;
+ 42         IF (RC^=' ') THEN DO;
+ 43         CALL SYMPUT("GRAPHINIT","GOPTIONS RESET=ALL GSFNAME=_GSFNAME;");
+ 44         CALL SYMPUT("GRAPHTERM","GOPTIONS NOACCESSIBLE;");
+ 45         END;
+ 46         RUN;
+ 
+ NOTE: “DATA 语句”所用时间（总处理时间）:
+       实际时间          0.00 秒
+       CPU 时间          0.01 秒
+       
+ 
+ 47         DATA _NULL_;
+ 48         RC=SYSPROD("PRODNUM002");
+ 49         IF (RC^=1) THEN DO;
+ 50         CALL SYMPUT("GRAPHINIT","");
+ 51         CALL SYMPUT("GRAPHTERM","");
+ 52         END;
+ 53         RUN;
+ 
+ NOTE: “DATA 语句”所用时间（总处理时间）:
+       实际时间          0.00 秒
+       CPU 时间          0.00 秒
+       
+ 
+ 54         %LET _DATAOUT_MIME_TYPE=;
+ 55         %LET _DATAOUT_NAME=;
+ 56         %LET _DATAOUT_TABLE=;
+ 57         %LET _DATAOUT_URL=;
+ 58         %SYMDEL _DATAOUT_MIME_TYPE _DATAOUT_NAME _DATAOUT_URL _DATAOUT_TABLE;
+ 59         %LET _SASWS_ = %BQUOTE(/r/ge.unx.sas.com/vol/vol120/u12/scnfuc);
+ 60         %LET
+ 60       ! _SASWSTEMP_=%BQUOTE(/r/ge.unx.sas.com/vol/vol120/u12/scnfuc/.sasstudiocas/.images/97e0051c-3e92-4b6f-ba7e-9e26664b4494);
+ 61         ODS LISTING CLOSE;
+ 62         ODS AUTONAVIGATE OFF;
+ 63         ODS GRAPHICS ON;
+ 64         ODS HTML5 (ID=WEB) DEVICE=PNG GPATH="&_SASWSTEMP_" ENCODING=utf8 FILE=_HTMLOUT (TITLE='结果: 入门程序 1.sas')
+ 64       ! STYLE=Htmlblue OPTIONS(BITMAP_MODE='INLINE' SVG_MODE='INLINE' CSS_PREFIX='.ods_97e0051c-3e92-4b6f-ba7e-9e26664b4494'
+ 64       ! BODY_ID='div_97e0051c-3e92-4b6f-ba7e-9e26664b4494' );
+ NOTE: 正在写入 HTML5(WEB) Body（主体）文件: _HTMLOUT
+ 65         ODS RTF (ID=WEB) STYLE=Rtf FILE=_RTFOUT sasdate;
+ NOTE: 正在写入 RTF Body（主体）文件: _RTFOUT
+ 66         ODS PDF (ID=WEB) STYLE=Pearl FILE=_PDFOUT;
+ NOTE: 正在将 ODS PDF(WEB) 输出写入 DISK 目标“_PDFOUT”，打印机为“PDF”。
+ 67         &GRAPHINIT;
+ 68         OPTIONS FIRSTOBS=1;
+ 69         OPTIONS OBS=MAX;
+ 70         OPTIONS DTRESET DATE NUMBER NOTES;
+ 71         OPTIONS NOSYNTAXCHECK;
+ 72         
+ 73         /*中文测试内容  */
+ 74         Proc print data=sashelp.class;
+ 75         run;
+ 
+ NOTE: 从数据集 SASHELP.CLASS. 读取了 19 个观测
+ NOTE: “PROCEDURE PRINT”所用时间（总处理时间）:
+       实际时间          0.07 秒
+       CPU 时间          0.07 秒
+       
+ 
+ 76         
+ 77         OPTIONS NOSYNTAXCHECK;
+ 78         ODS HTML CLOSE;
+ 79         &GRAPHTERM; ;*';*";*/;RUN;QUIT;
+ 80         QUIT;RUN;
+ 81         ODS HTML5 (ID=WEB) CLOSE;
+ 82         
+ 83         ODS RTF (ID=WEB) CLOSE;
+ 84         ODS PDF (ID=WEB) CLOSE;
+ NOTE: ODS PDF(WEB) 打印了 1 页，位置: /tmp/SAS_work2ACE0000057D_vdmml-tue-17w47-ud.uda.sashq-r.openstack.sas.com/#LN00013。
+ 85         FILENAME _GSFNAME;
+ NOTE: 已取消文件引用名 _GSFNAME 的分配。
+
+ 86         DATA _NULL_;
+ 87         RUN;
+ 
+ NOTE: “DATA 语句”所用时间（总处理时间）:
+       实际时间          0.00 秒
+       CPU 时间          0.01 秒
+       
+ 
+ 88         OPTIONS VALIDMEMNAME=COMPAT;
+ 89         OPTIONS NOTES STIMER SOURCE SYNTAXCHECK;
+ 90         
